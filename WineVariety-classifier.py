@@ -35,8 +35,8 @@ def main(samplesNumber, isKernel, isVerbose):
         hyperParams = {"C":[0.01, 0.1, 1, 10, 100, 1000], "gamma":[0.0001, 0.001, 0.01, 0.1, 1, 10, 100]}
         clf, fitDuration = RbfKernel(X_train, y_train, hyperParams)
 
-    if(isVerbose):
-        means = clf.cv_results_['mean_test_score']
+    means = clf.cv_results_['mean_test_score']
+    if(isVerbose):        
         for mean, hyperParams in zip(means, clf.cv_results_['params']):
             print("{0:.0%} for {1}".format(mean, hyperParams))
         print('\nBest params: ' + str(clf.best_params_))
@@ -55,7 +55,7 @@ def RbfKernel(X_train, y_train, hyperParams):
     clf.fit(X_train, y_train)
     end = datetime.now()
 
-    print("End fit. Duration: {}".format(end - start))
+    print("End fit!")
     print()
 
     return clf, (end - start)
